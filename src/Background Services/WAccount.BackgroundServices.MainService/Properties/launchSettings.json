@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "WAccount.BackgroundServices.MainService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
