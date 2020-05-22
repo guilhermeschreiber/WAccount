@@ -9,7 +9,7 @@ using WAccount.Repositories.Infrastructure;
 namespace WAccount.Repositories.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200521182109_InitialCreate")]
+    [Migration("20200522175851_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,15 @@ namespace WAccount.Repositories.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "guiherme@schreiber.com",
+                            Name = "Guilherme",
+                            Password = "123"
+                        });
                 });
 
             modelBuilder.Entity("WAccount.Domain.Models.Transaction", b =>

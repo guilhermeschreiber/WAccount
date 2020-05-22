@@ -7,7 +7,7 @@ using WAccount.Repositories.Infrastructure.Interfaces;
 
 namespace WAccount.Repositories.Infrastructure
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T : BaseModel
     {
         protected readonly DatabaseContext context;
         private DbSet<T> entities;

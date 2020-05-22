@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Background Services\WAccount.BackgroundServices.MainService\WAccount.BackgroundServices.MainService.csproj" />
+    <ProjectReference Include="..\..\Domain\WAccount.Domain.Services\WAccount.Domain.Services.csproj" />
     <ProjectReference Include="..\..\Repositories\WAccount.Repositories.Infrastructure\WAccount.Repositories.Infrastructure.csproj" />
   </ItemGroup>
 

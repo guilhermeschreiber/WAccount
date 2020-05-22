@@ -5,17 +5,20 @@ namespace WAccount.Repositories.Infrastructure
 {
     public class DatabaseContext : DbContext
     {
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
         public DbSet<User> Users { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            options.UseMySQL("server=localhost;database=WA_DATABASE;user=guilherme;password=guilherme");
-        }
-
-        public DatabaseContext()
-        {
-            ChangeTracker.LazyLoadingEnabled = false;
-            ChangeTracker.AutoDetectChangesEnabled = false;
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 1,
+                    Name = "Guilherme",
+                    Email = "guiherme@schreiber.com",
+                    Password = "123"
+                }
+                );
         }
     }
 }

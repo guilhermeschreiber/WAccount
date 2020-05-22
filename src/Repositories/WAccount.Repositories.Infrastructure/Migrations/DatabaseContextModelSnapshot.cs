@@ -69,6 +69,15 @@ namespace WAccount.Repositories.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "guiherme@schreiber.com",
+                            Name = "Guilherme",
+                            Password = "123"
+                        });
                 });
 
             modelBuilder.Entity("WAccount.Domain.Models.Transaction", b =>

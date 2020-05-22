@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WAccount.Domain.Models
 {
-    public class User : BaseEntity
+    public class User : BaseModel
     {
         public ICollection<Transaction> Transactions { get; set; }
 

@@ -1,11 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>dotnet-WAccount.BackgroundService.MainService-FFBE398C-9681-4972-9F49-0733CAE7A547</UserSecretsId>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\WAccount.Domain.Services\WAccount.Domain.Services.csproj" />
+    <ProjectReference Include="..\..\Repositories\WAccount.Repositories.Infrastructure\WAccount.Repositories.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

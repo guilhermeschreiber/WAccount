@@ -47,6 +47,11 @@ namespace WAccount.Repositories.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "Name", "Password" },
+                values: new object[] { 1, "guiherme@schreiber.com", "Guilherme", "123" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_UserId",
                 table: "Transactions",

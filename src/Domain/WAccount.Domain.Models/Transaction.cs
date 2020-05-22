@@ -7,7 +7,7 @@ using WAccount.Domain.Models.Enumerators;
 
 namespace WAccount.Domain.Models
 {
-    public class Transaction : BaseEntity
+    public class Transaction : BaseModel
     {
         [Required]
         [ForeignKey("User")]
