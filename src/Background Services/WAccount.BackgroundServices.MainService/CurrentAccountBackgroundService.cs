@@ -23,11 +23,12 @@ namespace WAccount.BackgroundServices.MainService
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            TimeSpan interval = new TimeSpan(0, 10, 0); // 10 minutes
+
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("CurrentAccountBackgroundService running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(2000, stoppingToken);
-                _bankAccountService.UpdateBalance(null);
+                await Task.Delay(interval, stoppingToken);
+                _bankAccountService.UpdateBalanceDaily();
             }
         }
     }

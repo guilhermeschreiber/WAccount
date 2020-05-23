@@ -7,23 +7,21 @@ using WAccount.Domain.Models.Enumerators;
 
 namespace WAccount.Domain.Models
 {
-    public class Transaction : BaseModel
+    public class Transaction : BaseEntity
     {
         [Required]
-        [ForeignKey("User")]
         public int UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual UserAccount User { get; set; }
 
         [Required]
         public TransactionType Type { get; set; }
 
         [Required]
-        [DataType(DataType.Currency)]
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Scheduling { get; set; }
-        
-        public DateTime LastChange { get; set; }
+
         public TransactionResult Result { get; set; }
     }
 }

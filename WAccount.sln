@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WAccount.Domain.Models", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WAccount.Repositories.Infrastructure", "src\Repositories\WAccount.Repositories.Infrastructure\WAccount.Repositories.Infrastructure.csproj", "{6E546F32-28E1-4885-AF30-96505F5FACCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WAccount.UnitTests", "tests\WAccount.UnitTests\WAccount.UnitTests.csproj", "{6A4DD2CF-AAA0-4931-A908-A9E44B831236}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{6E546F32-28E1-4885-AF30-96505F5FACCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E546F32-28E1-4885-AF30-96505F5FACCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E546F32-28E1-4885-AF30-96505F5FACCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A4DD2CF-AAA0-4931-A908-A9E44B831236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A4DD2CF-AAA0-4931-A908-A9E44B831236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A4DD2CF-AAA0-4931-A908-A9E44B831236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A4DD2CF-AAA0-4931-A908-A9E44B831236}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,7 @@ Global
 		{06945101-057C-4437-A36D-5D5A03CD9903} = {DBEDA12C-99E0-4D9F-A645-60B1DB859337}
 		{B392A55C-D1B0-4609-881E-5FA42AAF0721} = {DBEDA12C-99E0-4D9F-A645-60B1DB859337}
 		{6E546F32-28E1-4885-AF30-96505F5FACCE} = {2780DAF7-EBA3-4D40-AD1A-626BEC9E7047}
+		{6A4DD2CF-AAA0-4931-A908-A9E44B831236} = {931EB052-AE46-47D1-AD6A-57388AB84015}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28BDD7E4-24E7-48E5-8F42-1422907DB242}

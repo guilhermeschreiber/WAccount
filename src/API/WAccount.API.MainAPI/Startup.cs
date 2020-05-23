@@ -30,8 +30,8 @@ namespace WAccount.API.MainAPI
                 options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            services.AddTransient<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<IUserAccountRepository, UserAccountRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
 
             services.AddSingleton<IBankAccountService, BankAccountService>();
             services.AddSingleton<IPendingTransactionsService, PendingTransactionsService>();

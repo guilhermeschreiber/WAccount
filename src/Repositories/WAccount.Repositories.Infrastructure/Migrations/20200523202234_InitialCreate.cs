@@ -9,18 +9,22 @@ namespace WAccount.Repositories.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "UserAccounts",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    UpdatedAt = table.Column<DateTime>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false)
+                    Password = table.Column<string>(nullable: false),
+                    Balance = table.Column<decimal>(nullable: false),
+                    MonthlyIncome = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_UserAccounts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -29,28 +33,30 @@ namespace WAccount.Repositories.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    UpdatedAt = table.Column<DateTime>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
                     Type = table.Column<int>(nullable: false),
-                    Amount = table.Column<int>(nullable: false),
-                    Scheduling = table.Column<DateTime>(nullable: false),
-                    LastChange = table.Column<DateTime>(nullable: false),
+                    Amount = table.Column<decimal>(nullable: false),
+                    Scheduling = table.Column<DateTime>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Result = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transactions_Users_UserId",
+                        name: "FK_Transactions_UserAccounts_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "UserAccounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Email", "Name", "Password" },
-                values: new object[] { 1, "guiherme@schreiber.com", "Guilherme", "123" });
+                table: "UserAccounts",
+                columns: new[] { "Id", "Balance", "Email", "MonthlyIncome", "Name", "Password" },
+                values: new object[] { 1, 0m, "guiherme@schreiber.com", 0m, "Guilherme", "123" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_UserId",
@@ -64,7 +70,7 @@ namespace WAccount.Repositories.Infrastructure.Migrations
                 name: "Transactions");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "UserAccounts");
         }
     }
 }

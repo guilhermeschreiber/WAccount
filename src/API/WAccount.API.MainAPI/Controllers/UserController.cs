@@ -10,40 +10,33 @@ namespace WAccount.API.MainAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IRepository<User> _userRepository;
+        private readonly IUserAccountRepository _userAccountRepository;
         private readonly IUserLoginService _userLoginService;
 
-        public UserController(IRepository<User> userRepository, IUserLoginService userLoginService)
+        public UserController(IUserAccountRepository userAccountRepository, IUserLoginService userLoginService)
         {
-            _userRepository = userRepository;
+            _userAccountRepository = userAccountRepository;
             _userLoginService = userLoginService;
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<User> GetAllUsers() => _userRepository.GetAll();
+        public IEnumerable<UserAccount> GetAllUsers() => _userAccountRepository.GetAll();
 
         [HttpGet]
         [Route("{userId}")]
-        public User GetUserById(int userId) => _userRepository.GetById(userId);
+        public UserAccount GetUserById(int userId) => _userAccountRepository.GetById(userId);
 
         [HttpPost]
         [Route("")]
-        public void AddUser([FromBody] User user) => _userRepository.Insert(user);
+        public void AddUser([FromBody] UserAccount user) => _userAccountRepository.Insert(user);
 
         [HttpDelete]
         [Route("{userId}")]
-        public void DeleteUser(int userId) => _userRepository.Delete(userId);
+        public void DeleteUser(int userId) => _userAccountRepository.Delete(userId);
 
         [HttpGet]
         [Route("Login")]
-        public ActionResult Login(string email, string password)
-        {
-            if (_userLoginService.Login(email, password) == false)
-            {
-                return Unauthorized();
-            }
-            return Ok();
-        }
+        public UserAccount Login(string email, string password) => _userLoginService.Login(email, password);
     }
 }

@@ -21,7 +21,7 @@ namespace WAccount.API.MainAPI.Controllers
         public IEnumerable<Transaction> GetAllTransactions() => _transactionRepository.GetAll();
 
         [HttpGet("{userId}")]
-        public Task<Transaction> GetTransactionByUser(int userId) => _transactionRepository.GetByUser(userId);
+        public Transaction GetTransactionByUser(int userId) => _transactionRepository.GetByUser(userId);
 
         [HttpPost("")]
         public void AddTransaction([FromBody] Transaction transaction) => _transactionRepository.Insert(transaction);

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WAccount.Domain.Models
 {
-    public class User : BaseModel
+    public class UserAccount : BaseEntity
     {
         public ICollection<Transaction> Transactions { get; set; }
 
@@ -14,11 +14,13 @@ namespace WAccount.Domain.Models
         public string Name { get; set; }
 
         [Required]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public decimal Balance { get; set; }
+
+        public decimal MonthlyIncome { get; set; }
     }
 }

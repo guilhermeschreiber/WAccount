@@ -23,20 +23,22 @@ namespace WAccount.Repositories.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastChange")
-                        .HasColumnType("datetime");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("Result")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Scheduling")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -48,15 +50,21 @@ namespace WAccount.Repositories.Infrastructure.Migrations
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("WAccount.Domain.Models.User", b =>
+            modelBuilder.Entity("WAccount.Domain.Models.UserAccount", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18, 2)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<decimal>("MonthlyIncome")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -66,23 +74,30 @@ namespace WAccount.Repositories.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("UserAccounts");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            Balance = 0m,
                             Email = "guiherme@schreiber.com",
+                            MonthlyIncome = 0m,
                             Name = "Guilherme",
-                            Password = "123"
+                            Password = "123",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
             modelBuilder.Entity("WAccount.Domain.Models.Transaction", b =>
                 {
-                    b.HasOne("WAccount.Domain.Models.User", "User")
+                    b.HasOne("WAccount.Domain.Models.UserAccount", "User")
                         .WithMany("Transactions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

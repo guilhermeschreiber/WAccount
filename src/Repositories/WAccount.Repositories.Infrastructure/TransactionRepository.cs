@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 using WAccount.Domain.Models;
 using WAccount.Repositories.Infrastructure.Interfaces;
@@ -9,10 +10,9 @@ namespace WAccount.Repositories.Infrastructure
     {
         public TransactionRepository(DatabaseContext context) : base(context) { }
 
-        public Task<Transaction> GetByUser(int userId)
+        public Transaction GetByUser(int userId)
         {
-            return context.Set<Transaction>().
-                FirstOrDefaultAsync(transaction => transaction.UserId == userId);
+            return context.Set<Transaction>().FirstOrDefault(transaction => transaction.UserId == userId);
         }
     }
 }

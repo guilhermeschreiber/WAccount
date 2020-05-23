@@ -2,8 +2,8 @@
 {
     public enum TransactionResult
     {
+        Pending,
         Done,
-        Error,
-        Scheduled,
+        Error
     }
 }

@@ -22,11 +22,15 @@ namespace WAccount.BackgroundServices.MainService
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            TimeSpan interval = new TimeSpan(0, 0, 5); // 30 seconds
+
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("TransactionResolverBackgroundService running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(2000, stoppingToken);
-                _pendingTransactionsService.ResolvePendingTransactions();
+                await Task.Delay(interval, stoppingToken);
+                if (_pendingTransactionsService.ResolvePendingTransactions())
+                {
+                    _logger.LogInformation("TransactionResolverBackgroundService running at: {time}", DateTimeOffset.Now);
+                }
             }
         }
     }
