@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WAccount.Domain.Models;
@@ -10,9 +11,9 @@ namespace WAccount.Repositories.Infrastructure
     {
         public TransactionRepository(DatabaseContext context) : base(context) { }
 
-        public Transaction GetByUser(int userId)
+        public IEnumerable<Transaction> GetByUser(int userId)
         {
-            return context.Set<Transaction>().FirstOrDefault(transaction => transaction.UserId == userId);
+            return context.Set<Transaction>().Where(transaction => transaction.UserId == userId).ToList();
         }
     }
 }

@@ -8,6 +8,6 @@ namespace WAccount.Repositories.Infrastructure.Interfaces
 {
     public interface ITransactionRepository : IRepository<Transaction>
     {
-        public Transaction GetByUser(int userId);
+        public IEnumerable<Transaction> GetByUser(int userId);
     }
 }

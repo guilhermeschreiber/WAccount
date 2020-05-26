@@ -1,11 +1,9 @@
 ﻿using FluentAssertions;
 using Moq;
 using System;
-using System;
 using System.Linq.Expressions;
 using WAccount.Domain.Models;
 using WAccount.Domain.Services;
-using WAccount.Domain.Services.Interfaces;
 using WAccount.Repositories.Infrastructure.Interfaces;
 using Xunit;
 

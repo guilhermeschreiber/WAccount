@@ -1,0 +1,46 @@
+<h4 class="ml-4 mt-4">Add a transaction</h4>
+
+<form [formGroup]="transactionForm" class="form mt-3 ml-3" (submit)="add()">
+
+  <div class="form-group" style="width: 300px">
+    <label>Operation type</label>
+        <select 
+            class="form-control" 
+            formControlName="type" 
+            placeholder="Type">
+                <option>Credit</option>
+                <option>Debit</option>
+        </select>      
+  </div>
+
+  <div class="form-group" style="width: 300px">
+    <label>Amount</label>
+    <div class="input-group">
+        <div class="input-group-prepend input-group-text">R$</div>
+        <input 
+            class="form-control" 
+            formControlName="amount" 
+            type="number" 
+            min="0"
+            placeholder="Amount">
+        <div class="input-group-prepend input-group-text">,00</div>
+    </div>       
+  </div>
+
+  <div class="form-group" style="width: 300px">
+    <label>Scheduling</label>
+    <input
+        formControlName="scheduling" 
+        class="form-control" 
+        placeholder="dd/mm/yyyy">          
+  </div>
+
+  <button 
+      [disabled]="transactionForm.invalid" 
+      type="submit" 
+      class="btn btn-primary btn-block"
+      style="width: 300px">
+      Submit
+  </button>
+
+</form>

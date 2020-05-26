@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,8 @@ using WAccount.Repositories.Infrastructure.Interfaces;
 
 namespace WAccount.API.MainAPI.Controllers
 {
+    [Authorize("Bearer")]
+    [Produces("application/json")]
     [Route("[controller]")]
     [ApiController]
     public class TransactionController : ControllerBase
@@ -18,16 +21,11 @@ namespace WAccount.API.MainAPI.Controllers
             _transactionRepository = transactionRepository;
         }
 
-        [Authorize("Bearer")]
         [HttpGet("{userId}")]
-        public Transaction GetTransactionByUser(int userId) => _transactionRepository.GetByUser(userId);
+        [Produces(MediaTypeNames.Application.Json)]
+        public IEnumerable<Transaction> GetTransactionByUser(int userId) => _transactionRepository.GetByUser(userId);
 
-        [Authorize("Bearer")]
         [HttpPost("")]
         public void AddTransaction([FromBody] Transaction transaction) => _transactionRepository.Insert(transaction);
-
-        [Authorize("Bearer")]
-        [HttpPost("update")]
-        public void UpdateTransaction([FromBody] Transaction transaction) => _transactionRepository.Update(transaction);
     }
 }
