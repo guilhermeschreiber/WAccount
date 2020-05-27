@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using System;
 using WAccount.API.MainAPI.Authentication;
 using WAccount.BackgroundServices.MainService;
@@ -27,11 +28,13 @@ namespace WAccount.API.MainAPI
 
         public IConfiguration Configuration { get; }
 
+        private const bool RUN_SWAGGER = false;
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "../../../front/dist";
@@ -85,6 +88,9 @@ namespace WAccount.API.MainAPI
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
                     .RequireAuthenticatedUser().Build());
             });
+
+            services.AddSwaggerGen(c => 
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WAccount-API", Version = "v1" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,19 +125,25 @@ namespace WAccount.API.MainAPI
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
+
+            if (RUN_SWAGGER)
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "../../../front";
-
-                if (env.IsDevelopment())
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WAccount"));
+            }
+            else
+            {
+                app.UseSpa(spa =>
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
-                    spa.Options.StartupTimeout = TimeSpan.FromSeconds(200);
-                }
-            });
+                    spa.Options.SourcePath = "../../../front";
+
+                    if (env.IsDevelopment())
+                    {
+                        spa.UseAngularCliServer(npmScript: "start");
+                        spa.Options.StartupTimeout = TimeSpan.FromSeconds(200);
+                    }
+                });
+            }
 
             CreateDatabase(services.GetRequiredService<DatabaseContext>());
         }
