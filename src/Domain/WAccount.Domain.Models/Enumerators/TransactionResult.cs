@@ -1,4 +1,5 @@
-﻿namespace WAccount.Domain.Models.Enumerators
+﻿
+namespace WAccount.Domain.Models.Enumerators
 {
     public enum TransactionResult
     {

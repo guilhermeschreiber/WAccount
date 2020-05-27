@@ -1,8 +1,8 @@
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using WAccount.Domain.Services.Interfaces;
 
 namespace WAccount.BackgroundServices.MainService
@@ -22,7 +22,7 @@ namespace WAccount.BackgroundServices.MainService
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            TimeSpan interval = new TimeSpan(0, 0, 5); // 30 seconds
+            TimeSpan interval = new TimeSpan(hours: 0, minutes: 0, seconds: 30);
 
             while (!stoppingToken.IsCancellationRequested)
             {

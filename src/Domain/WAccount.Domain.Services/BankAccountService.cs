@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Linq;
-using WAccount.Domain.Models;
-using WAccount.Domain.Models.Enumerators;
 using WAccount.Domain.Services.Interfaces;
-using WAccount.Repositories.Infrastructure;
 using WAccount.Repositories.Infrastructure.Interfaces;
 
 namespace WAccount.Domain.Services
@@ -12,7 +8,7 @@ namespace WAccount.Domain.Services
     {
         private readonly IUserAccountRepository _userAccountRepository;
 
-        public const decimal DAILY_RETURN_RATE = (decimal)(0.029 / 12);
+        public const double DAILY_RETURN_RATE = 0.0025;
 
         public BankAccountService (IUserAccountRepository userAccountRepository)
         {
@@ -26,17 +22,23 @@ namespace WAccount.Domain.Services
             foreach (var user in _userAccountRepository
                 .GetWhere(x => DateTime.Now.Date > x.UpdatedAt.Date))
             {
-                while (DateTime.Now.Date > user.UpdatedAt.Date)
+                var diffDays = (int) (DateTime.Now - user.UpdatedAt).TotalDays;
+                var actualBalance = user.Balance;
+                user.Balance *= (decimal) Math.Pow(1 + DAILY_RETURN_RATE, diffDays);
+
+                if (diffDays > DateTime.Now.Day)
                 {
-                    user.UpdatedAt = user.UpdatedAt.AddDays(1);
-                    if (user.UpdatedAt.Day == 1)
-                    {
-                        user.MonthlyIncome = 0;
-                    }
-                    decimal dailyIncode = user.Balance * DAILY_RETURN_RATE;
-                    user.MonthlyIncome += dailyIncode;
-                    user.Balance += dailyIncode;
+                    var lastMounthBalance = 
+                        user.Balance / 
+                        (decimal) Math.Pow(1 + DAILY_RETURN_RATE, DateTime.Now.Day);
+
+                    user.MonthlyIncome = user.Balance - lastMounthBalance;
                 }
+                else
+                {
+                    user.MonthlyIncome += user.Balance - actualBalance;
+                }
+
                 user.Balance = Decimal.Round(user.Balance, 2);
                 user.MonthlyIncome = Decimal.Round(user.MonthlyIncome, 2);
 

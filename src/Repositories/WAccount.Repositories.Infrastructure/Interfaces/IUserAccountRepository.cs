@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WAccount.Domain.Models;
+﻿using WAccount.Domain.Models;
 
 namespace WAccount.Repositories.Infrastructure.Interfaces
 {

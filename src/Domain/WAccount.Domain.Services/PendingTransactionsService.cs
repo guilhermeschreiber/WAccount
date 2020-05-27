@@ -1,9 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using WAccount.Domain.Models;
+﻿using System;
 using WAccount.Domain.Models.Enumerators;
 using WAccount.Domain.Services.Interfaces;
 using WAccount.Repositories.Infrastructure.Interfaces;
@@ -14,12 +9,14 @@ namespace WAccount.Domain.Services
     {
         private readonly ITransactionRepository _transactionRepository;
         private readonly IUserAccountRepository _userAccountRepository;
+
         public PendingTransactionsService (ITransactionRepository transactionRepository,
             IUserAccountRepository userAccountRepository) 
         {
             _transactionRepository = transactionRepository;
             _userAccountRepository = userAccountRepository;
         }
+
         public bool ResolvePendingTransactions()
         {
             var updated = false;
@@ -58,28 +55,6 @@ namespace WAccount.Domain.Services
             }
 
             return updated;
-        }
-
-        public bool UpdateBalanceBasedOnTransaction(Transaction transaction)
-        {
-            bool result = false;
-            UserAccount userAccount = _userAccountRepository.GetById(transaction.UserId);
-
-            if (userAccount != null)
-            {
-                if (transaction.Type == TransactionType.Credit)
-                {
-                    userAccount.Balance += transaction.Amount;
-                    result = true;
-                }
-                else if (userAccount.Balance > transaction.Amount)
-                {
-                    userAccount.Balance -= transaction.Amount;
-                    result = true;
-                }
-                _userAccountRepository.Update(userAccount);
-            }
-            return result;
         }
     }
 }

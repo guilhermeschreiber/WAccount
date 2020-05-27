@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using WAccount.Domain.Models;
-using WAccount.Domain.Services.Interfaces;
 using WAccount.Repositories.Infrastructure.Interfaces;
 
 namespace WAccount.API.MainAPI.Controllers

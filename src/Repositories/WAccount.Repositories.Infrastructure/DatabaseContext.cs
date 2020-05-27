@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Data;
 using WAccount.Domain.Models;
 
 namespace WAccount.Repositories.Infrastructure
@@ -9,8 +8,10 @@ namespace WAccount.Repositories.Infrastructure
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
+
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserAccount>().HasData(

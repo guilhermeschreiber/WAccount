@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WAccount.Domain.Models;
 using WAccount.Repositories.Infrastructure.Interfaces;
 

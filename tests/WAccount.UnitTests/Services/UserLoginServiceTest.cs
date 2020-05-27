@@ -23,9 +23,10 @@ namespace WAccount.UnitTests.Services
         {
             /// Arrange
             var userAccount = new UserAccount { Email = "guilherme@teste.com", Password = "123" };
-            UserAccountRepositoryMock.Setup(x => x.GetWhere(It.IsAny<Expression<Func<UserAccount, bool>>>()))
-                .Returns(
-                    new UserAccount [] { userAccount });
+            UserAccountRepositoryMock
+                .Setup(x =>
+                    x.GetWhere(It.IsAny<Expression<Func<UserAccount, bool>>>()))
+                        .Returns(new UserAccount [] { userAccount });
 
             var userLoginService = 
                 new UserLoginService(UserAccountRepositoryMock.Object);
@@ -35,6 +36,26 @@ namespace WAccount.UnitTests.Services
 
             /// Assert
             result.Should().BeEquivalentTo(userAccount);
+        }
+
+        [Fact]
+        public void Login_Error()
+        {
+            /// Arrange
+            var userAccount = new UserAccount { Email = "guilherme@teste.com", Password = "123" };
+            UserAccountRepositoryMock
+                .Setup(x =>
+                    x.GetWhere(It.IsAny<Expression<Func<UserAccount, bool>>>()))
+                        .Returns(new UserAccount[] { });
+
+            var userLoginService =
+                new UserLoginService(UserAccountRepositoryMock.Object);
+
+            /// Act
+            var result = userLoginService.Login(userAccount.Email, userAccount.Password);
+
+            /// Assert
+            result.Should().BeNull();
         }
     }
 }
