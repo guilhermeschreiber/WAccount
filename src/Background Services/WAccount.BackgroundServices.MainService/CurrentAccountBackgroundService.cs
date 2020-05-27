@@ -22,7 +22,7 @@ namespace WAccount.BackgroundServices.MainService
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            TimeSpan interval = new TimeSpan(hours: 0, minutes: 0, seconds: 50);
+            TimeSpan interval = new TimeSpan(hours: 0, minutes: 5, seconds: 0);
 
             while (!stoppingToken.IsCancellationRequested)
             {
