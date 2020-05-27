@@ -2,6 +2,7 @@
 using WAccount.Domain.Models;
 using WAccount.Domain.Services.Interfaces;
 using WAccount.Repositories.Infrastructure.Interfaces;
+using WAccount.Shared;
 
 namespace WAccount.Domain.Services
 {
@@ -17,7 +18,7 @@ namespace WAccount.Domain.Services
         public UserAccount Login(string email, string password)
         {
             return _userAccountRepository
-                .GetWhere(x => x.Email == email && x.Password == password)
+                .GetWhere(x => x.Email == email && x.Password == MD5Hash.GetHash(password))
                 .FirstOrDefault();
         }
     }

@@ -75,7 +75,6 @@ namespace WAccount.UnitTests.Services
             result.Should().BeFalse();
             UserAccountRepositoryMock.Verify(x => x.Update(It.IsAny<UserAccount>()), Times.Never);
             TransactionRepositoryMock.Verify(x => x.Update(It.IsAny<Transaction>()), Times.Never);
-
         }
     }
 }

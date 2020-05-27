@@ -55,8 +55,8 @@ namespace WAccount.Repositories.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "UserAccounts",
-                columns: new[] { "Id", "Balance", "Email", "MonthlyIncome", "Name", "Password" },
-                values: new object[] { 1, 0m, "guiherme@schreiber.com", 0m, "Guilherme", "123" });
+                columns: new[] { "Id", "Balance", "Email", "MonthlyIncome", "Name", "Password", "UpdatedAt" },
+                values: new object[] { 1, 7200m, "admin@admin.com", 0m, "Guilherme Schreiber", "202cb962ac59075b964b07152d234b70", new DateTime(2020, 4, 27, 3, 28, 25, 153, DateTimeKind.Local).AddTicks(361) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_UserId",

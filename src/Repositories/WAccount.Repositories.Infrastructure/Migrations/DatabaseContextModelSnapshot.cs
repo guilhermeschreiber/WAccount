@@ -86,12 +86,12 @@ namespace WAccount.Repositories.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Balance = 0m,
-                            Email = "guiherme@schreiber.com",
+                            Balance = 7200m,
+                            Email = "admin@admin.com",
                             MonthlyIncome = 0m,
-                            Name = "Guilherme",
-                            Password = "123",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Name = "Guilherme Schreiber",
+                            Password = "202cb962ac59075b964b07152d234b70",
+                            UpdatedAt = new DateTime(2020, 4, 27, 3, 28, 25, 153, DateTimeKind.Local).AddTicks(361)
                         });
                 });
 

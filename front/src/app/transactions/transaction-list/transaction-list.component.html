@@ -4,7 +4,7 @@
     <div class="card bg-dark  text-white">
       <div class="card-body">
         <h4 class="card-title">Balance</h4>
-        <p class="card-text">{{ account.balance }}</p>
+        <p class="card-text">$ {{ account.balance }}</p>
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
     <div class="card bg-dark text-white">
       <div class="card-body">
         <h4 class="card-title">Mounthly Income</h4>
-        <p class="card-text">{{ account.monthlyIncome }}</p>
+        <p class="card-text">$ {{ account.monthlyIncome }}</p>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
     <tbody>
         <tr *ngFor="let transaction of (transactions$ | async)">
             <th scope="row">{{transaction.type | typeAsString}}</th>
-            <td>{{transaction.amount}}</td>
+            <td>$ {{transaction.amount}}</td>
             <td type="date">{{transaction.scheduling}}</td>
             <td>{{transaction.result | resultAsString}}</td>
           </tr>

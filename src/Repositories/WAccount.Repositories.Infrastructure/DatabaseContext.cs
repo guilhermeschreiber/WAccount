@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using WAccount.Domain.Models;
+using WAccount.Shared;
 
 namespace WAccount.Repositories.Infrastructure
 {
@@ -18,9 +20,11 @@ namespace WAccount.Repositories.Infrastructure
                 new UserAccount
                 {
                     Id = 1,
-                    Name = "Guilherme",
-                    Email = "guiherme@schreiber.com",
-                    Password = "123"
+                    Name = "Guilherme Schreiber",
+                    Email = "admin@admin.com",
+                    Password = MD5Hash.GetHash("123"),
+                    UpdatedAt = DateTime.Now.AddDays(-30),
+                    Balance = 7200
                 }
                 );
         }

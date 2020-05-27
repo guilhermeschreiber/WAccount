@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using WAccount.Domain.Models;
 using WAccount.Repositories.Infrastructure.Interfaces;
+using WAccount.Shared;
 
 namespace WAccount.API.MainAPI.Controllers
 {
@@ -28,7 +29,11 @@ namespace WAccount.API.MainAPI.Controllers
 
         [HttpPost]
         [Route("")]
-        public void AddUser([FromBody] UserAccount user) => _userAccountRepository.Insert(user);
+        public void AddUser([FromBody] UserAccount user)
+        {
+            user.Password = MD5Hash.GetHash(user.Password);
+            _userAccountRepository.Insert(user);
+        } 
 
         [HttpPost]
         [Route("update")]

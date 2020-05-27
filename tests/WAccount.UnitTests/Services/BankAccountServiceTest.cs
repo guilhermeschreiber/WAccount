@@ -130,7 +130,6 @@ namespace WAccount.UnitTests.Services
             UserAccountRepositoryMock.Verify(x => x.Update(It.IsAny<UserAccount>()), Times.Never);
         }
 
-
         #region Private Helpers
         private decimal calculateBalance(decimal initialBalance, int days)
         {
@@ -153,10 +152,7 @@ namespace WAccount.UnitTests.Services
                 return Decimal.Round(initialIncome +
                     (initialBalance * (decimal)Math.Pow(1 + BankAccountService.DAILY_RETURN_RATE, days) - initialBalance), 2);
             }
-
         }
         #endregion
-
-
     }
 }
