@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 
 import { Account } from './account'
@@ -9,14 +9,10 @@ export class AccountService {
 
     constructor(
         private http: HttpClient,
-        @Inject('BASE_URL') private baseUrl: string,
-        private tokenService: TokenService
+        @Inject('BASE_URL') private baseUrl: string
         ) {}
 
     accountFromId(id: string) {
-        return this.http
-            .get<Account>(
-                this.baseUrl + 'user/' + id,
-                { headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.tokenService.getToken())});
+        return this.http.get<Account>(this.baseUrl + 'user/' + id);
     }
 }

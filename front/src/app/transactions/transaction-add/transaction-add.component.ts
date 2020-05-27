@@ -25,7 +25,7 @@ export class TransactionAddComponent implements OnInit
     {
         this.transactionForm = this.formBuilder.group
         ({
-          type: ['', Validators.required],
+          type: ['Credit', Validators.required],
           amount: ['', Validators.required],
           scheduling: ['', Validators.required]
         });
@@ -51,7 +51,7 @@ export class TransactionAddComponent implements OnInit
               err => 
               {
                 console.log(err);
-                alert('Error');
+                alert('Error in submitting');
                 this.transactionForm.reset();
               });
         }

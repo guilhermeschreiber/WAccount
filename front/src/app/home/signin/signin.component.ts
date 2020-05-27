@@ -39,7 +39,6 @@ export class SignInComponent implements OnInit {
     
     loginError (error: string)
     {
-        console.log(error);
         this.loginForm.reset();
         this.platformDetectorService.isPlatformBrowser() && 
             this.userEmailInput.nativeElement.focus();
